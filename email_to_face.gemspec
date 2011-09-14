@@ -24,6 +24,5 @@ Gem::Specification.new do |s|
   # s.add_runtime_dependency "rest-client"
   s.add_runtime_dependency "json"
   s.add_runtime_dependency "typhoeus"
-  s.add_runtime_dependency "digest"
   s.add_runtime_dependency "face"
 end
