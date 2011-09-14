@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Julian Tescher"]
   s.email       = ["jatescher@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Email to user image tool }
-  s.description = %q{TODO: A way to simply obtain a facebook, or gravatar image from an email.}
+  s.summary     = %q{ Email to user image tool }
+  s.description = %q{ A way to simply obtain a facebook, or gravatar image from an email. }
 
   s.rubyforge_project = "email_to_face"
 
