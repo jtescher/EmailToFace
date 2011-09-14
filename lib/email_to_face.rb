@@ -1,5 +1,5 @@
 require "json"
-require 'typhoeus'
+require 'net/http'
 require 'face'
 require "email_to_face/version"
 require 'email_to_face/app'
@@ -14,8 +14,13 @@ module EmailToFace
     def self.user_image(email)
       begin
         # Query the graph for the user e.g. email@gmail.com&type=user&access_token=token
-        uri = URI.encode("https://graph.facebook.com/search?q=#{email}&type=user&access_token=#{@access_token}")
-        response = Typhoeus::Request.get(uri, :disable_ssl_peer_verification => true)
+        url = URI.encode("https://graph.facebook.com/search?q=#{email}&type=user&access_token=#{@access_token}")
+        uri = URI.parse(url)
+
+        req = Net::HTTP.new(uri.host, 443)
+        req.use_ssl = true
+
+        response = req.request_get(uri.path + '?' + uri.query)
         result = JSON.parse(response.body)
       rescue Exception => e
         puts e.inspect
@@ -35,9 +40,9 @@ module EmailToFace
 
     def self.user_image(email)
       begin
-        uri = URI.encode("http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(email)}&d=404")
-        response = Typhoeus::Request.get(uri)
-        response.code == 200 ? uri : nil
+        url = "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(email)}&d=404"
+        response = Net::HTTP.get_response(URI.parse(url))
+        response.code == '200' ? url : nil
       rescue Exception => e
         puts e.inspect
         return nil

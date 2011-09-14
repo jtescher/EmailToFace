@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = EmailToFace::VERSION
   s.authors     = ["Julian Tescher"]
   s.email       = ["jatescher@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/jtescher/EmailToFace"
   s.summary     = %q{ Email to user image tool }
   s.description = %q{ A way to simply obtain a facebook, or gravatar image from an email. }
 
@@ -23,6 +23,5 @@ Gem::Specification.new do |s|
 
   # s.add_runtime_dependency "rest-client"
   s.add_runtime_dependency "json"
-  s.add_runtime_dependency "typhoeus"
   s.add_runtime_dependency "face"
 end
