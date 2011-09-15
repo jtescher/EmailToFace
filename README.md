@@ -33,7 +33,7 @@ If the user is not found via the Facebook Graph API, or if an access token is no
 ``` ruby
 @email_to_face = EmailToFace::App.new()
 @email_to_face.convert('user@email.com')
-=> { :url => 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=200' }
+=> { :url => 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=180' }
 ```
 
 Face.com
@@ -65,10 +65,10 @@ By default Gravatar always returns square centered images. If you want to use fa
 	:face_api_secret		=> secret)
 
 @email_to_face.convert('user@email.com')
-=> { :url => 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=200', :x => 48.89, :y => 38.1 }
+=> { :url => 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=180', :x => 48.89, :y => 38.1 }
 ```
 
-The Facebook Graph API lets you specify the picture size you want with the type argument, which should be one of square (50x50), small (50 pixels wide, variable height), normal (100 pixels wide, variable height), and large (about 200 pixels wide, variable height). You can assign this via the `:facebook_image_type` option (default is 'large', Gravatar will match):
+The Facebook Graph API lets you specify the picture size you want with the type argument, which should be one of square (50x50), small (50 pixels wide, variable height), normal (100 pixels wide, variable height), and large (180 pixels wide, variable height). You can assign this via the `:facebook_image_type` option (default is 'large', Gravatar will match):
 
 ``` ruby
 @email_to_face = EmailToFace::App.new(

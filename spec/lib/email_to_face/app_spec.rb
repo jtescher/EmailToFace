@@ -42,9 +42,9 @@ describe EmailToFace::App do
             :face_api_key           => ENV['FACE_API_KEY'],
             :face_api_secret        => ENV['FACE_API_SECRET'])
         result = @app.convert("virulent@gmail.com")
-        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=200'
-        result[:x].should == 31.75
-        result[:y].should == 60.75
+        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=180'
+        result[:x].should == 31.39
+        result[:y].should == 60.28
       end
 
       it "should return an object with a url if :use_face_for_gravatar not set" do
@@ -52,7 +52,7 @@ describe EmailToFace::App do
             :face_api_key           => ENV['FACE_API_KEY'],
             :face_api_secret        => ENV['FACE_API_SECRET'])
         result = @app.convert("virulent@gmail.com")
-        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=200'
+        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=180'
         result[:x].should be_nil
         result[:y].should be_nil
       end

@@ -40,9 +40,9 @@ module EmailToFace
   class Gravatar
 
     def self.user_image(email, fb_type=nil)
-      fb_types = { 'square' => 50, 'small' => 50, 'normal' => 100, 'large' => 200 }
+      fb_types = { 'square' => 50, 'small' => 50, 'normal' => 100, 'large' => 180 }
       begin
-        url = "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(email)}&d=404&s=#{fb_types[fb_type] || 200}"
+        url = "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(email)}&d=404&s=#{fb_types[fb_type] || 180}"
         response = Net::HTTP.get_response(URI.parse(url))
         response.code == '200' ? url : nil
       rescue Exception => e

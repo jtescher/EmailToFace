@@ -22,7 +22,7 @@ end
 describe EmailToFace::Gravatar do
   describe ".user_image" do
     it "returns the url for the user's image if it exists" do
-      EmailToFace::Gravatar.user_image('virulent@gmail.com').should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=200'
+      EmailToFace::Gravatar.user_image('virulent@gmail.com').should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=180'
     end
 
     it "returns nil if the user does not exist" do
