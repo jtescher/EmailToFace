@@ -53,11 +53,13 @@ module EmailToFace
 
   class FaceAPI
 
-    def self.init(face_api_key, face_api_secret)
+    def self.init(face_api_key, face_api_secret, use_face_for_gravatar)
       @client = Face.get_client(:api_key => face_api_key, :api_secret => face_api_secret)
+      @use_face_for_gravatar = use_face_for_gravatar || false
     end
 
     def self.get_center(url)
+      return if url.match(/gravatar.com/) and @use_face_for_gravatar == false
       begin
         result = @client.faces_detect(:urls => url)
         result['photos'][0]['tags'].empty? ? nil : result['photos'][0]['tags'][0]['center']

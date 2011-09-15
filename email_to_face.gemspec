@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["jatescher@gmail.com"]
   s.homepage    = "https://github.com/jtescher/EmailToFace"
   s.summary     = %q{ Email to user image tool }
-  s.description = %q{ A way to simply obtain a facebook or gravatar image from an email. }
+  s.description = %q{ A way to simply obtain a Facebook or Gravatar image from an email. }
 
   s.rubyforge_project = "email_to_face"
 

@@ -12,7 +12,7 @@ module EmailToFace
 
       # Initialize Face.com API if params present
       if options[:face_api_key] and options[:face_api_secret]
-        FaceAPI.init(options[:face_api_key], options[:face_api_secret])
+        FaceAPI.init(options[:face_api_key], options[:face_api_secret], options[:use_face_for_gravatar])
         @face_init = true
       end
     end
@@ -34,8 +34,7 @@ module EmailToFace
       return nil if image_url.nil?
 
       # If present, grab face x,y from face.com
-      if @face_init
-        xy = FaceAPI.get_center(image_url)
+      if @face_init and xy = FaceAPI.get_center(image_url)
         { :url => image_url, :x => xy['x'], :y => xy['y'] }
       else
         { :url => image_url }
