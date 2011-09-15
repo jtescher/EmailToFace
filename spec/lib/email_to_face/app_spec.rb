@@ -23,6 +23,15 @@ describe EmailToFace::App do
         result[:x].should == 48.89
         result[:y].should == 42.29
       end
+
+      it "should return a :facebook_image_type facebook image if :facebook_image_type is set" do
+        @app = EmailToFace::App.new(
+          :facebook_user_token  => ENV['FB_USER_TOKEN'],
+          :facebook_image_type  => 'small')
+
+        result = @app.convert("pat2man@gmail.com")
+        result[:url].should == 'https://graph.facebook.com/518026574/picture?type=small'
+      end
     end
 
     context 'for gravatar' do
@@ -33,9 +42,9 @@ describe EmailToFace::App do
             :face_api_key           => ENV['FACE_API_KEY'],
             :face_api_secret        => ENV['FACE_API_SECRET'])
         result = @app.convert("virulent@gmail.com")
-        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404'
-        result[:x].should == 30.63
-        result[:y].should == 60.63
+        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=200'
+        result[:x].should == 31.75
+        result[:y].should == 60.75
       end
 
       it "should return an object with a url if :use_face_for_gravatar not set" do
@@ -43,7 +52,7 @@ describe EmailToFace::App do
             :face_api_key           => ENV['FACE_API_KEY'],
             :face_api_secret        => ENV['FACE_API_SECRET'])
         result = @app.convert("virulent@gmail.com")
-        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404'
+        result[:url].should == 'http://www.gravatar.com/avatar.php?gravatar_id=c44b0f24cfce9aacc7c1969c5666cfae&d=404&s=200'
         result[:x].should be_nil
         result[:y].should be_nil
       end

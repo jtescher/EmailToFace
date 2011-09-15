@@ -1,13 +1,15 @@
 module EmailToFace
   class App
-    attr_accessor :fb_init, :face_init
+    attr_accessor :fb_init, :face_init, :fb_type
 
     def initialize(options={})
 
       # Initialize Facebook if params present
       if options[:facebook_user_token]
-        Facebook.init(options[:facebook_user_token])
+
+        Facebook.init(options[:facebook_user_token], options[:facebook_image_type])
         @fb_init = true
+        @fb_type = options[:facebook_image_type]
       end
 
       # Initialize Face.com API if params present
@@ -27,7 +29,7 @@ module EmailToFace
 
       # If not found and twitter is initialized
       if image_url.nil?
-        image_url = Gravatar.user_image(email)
+        image_url = Gravatar.user_image(email, @fb_type)
       end
 
       # If still no image found, return nil

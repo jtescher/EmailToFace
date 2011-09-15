@@ -7,8 +7,9 @@ require 'email_to_face/app'
 module EmailToFace
   class Facebook
 
-    def self.init(fb_access_token)
+    def self.init(fb_access_token, facebook_image_type)
       @access_token = fb_access_token
+      @image_type = facebook_image_type
     end
 
     def self.user_image(email)
@@ -31,16 +32,17 @@ module EmailToFace
       raise result["error"]["message"] if result["error"]
 
       # Return either the url, or nil
-      result['data'] == [] ? nil : "https://graph.facebook.com/#{result['data'][0]['id']}/picture?type=large"
+      result['data'] == [] ? nil : "https://graph.facebook.com/#{result['data'][0]['id']}/picture?type=#{@image_type || 'large'}"
     end
 
   end
 
   class Gravatar
 
-    def self.user_image(email)
+    def self.user_image(email, fb_type=nil)
+      fb_types = { 'square' => 50, 'small' => 50, 'normal' => 100, 'large' => 200 }
       begin
-        url = "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(email)}&d=404"
+        url = "http://www.gravatar.com/avatar.php?gravatar_id=#{Digest::MD5::hexdigest(email)}&d=404&s=#{fb_types[fb_type] || 200}"
         response = Net::HTTP.get_response(URI.parse(url))
         response.code == '200' ? url : nil
       rescue Exception => e
